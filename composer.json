@@ -1,0 +1,25 @@
+{
+	"name" : "translation/pxTranslationBundle",
+	"description" : "Enable doctrine entities translations",
+	"keywords" : [
+		"translation"
+	],
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Ines Moknir",
+			"email" : "ines.mokni@proxym-it.com",
+		}
+	],
+	"support" : {
+	},
+	"require" : {
+		"php" : ">=5.2.7"
+	},
+	"require-dev" : {
+		"gedmo/doctrine-extensions": "dev-master"
+	},
+	"autoload" : {
+		"psr-0" : {
+		}
+	}
+}
