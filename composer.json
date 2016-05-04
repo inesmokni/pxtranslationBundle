@@ -1,25 +1,23 @@
 {
-	"name" : "translation/pxTranslationBundle",
+	"name" : "translation/px-translation-bundle",
 	"description" : "Enable doctrine entities translations",
 	"keywords" : [
 		"translation"
 	],
 	"license" : "MIT",
 	"authors" : [{
-			"name" : "Ines Moknir",
-			"email" : "ines.mokni@proxym-it.com",
+			"name" : "Ines Mokni",
+			"email" : "ines.mokni@proxym-it.com"
 		}
 	],
 	"support" : {
 	},
 	"require" : {
-		"php" : ">=5.2.7"
-	},
-	"require-dev" : {
+		"php" : ">=5.2.7",
 		"gedmo/doctrine-extensions": "dev-master"
 	},
 	"autoload" : {
-		"psr-0" : {
+		"psr-0" : {  "translation\\pxTranslationBundle": "" 
 		}
 	}
 }
