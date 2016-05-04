@@ -21,6 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\Tools\EntityRepositoryGenerator;
 use Doctrine\Bundle\DoctrineBundle\Mapping\DisconnectedMetadataFactory;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
+use translation\pxTranslationBundle\Generator\TranslationGenerator;
 
 /**
  * Generate entity classes from mapping information
