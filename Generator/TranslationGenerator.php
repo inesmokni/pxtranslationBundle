@@ -223,6 +223,38 @@ class TranslationGenerator extends EntityGenerator
     	chmod($path_trans, 0664);
     }
     
+    
+    
+    /**
+     * Generates a PHP5 Doctrine 2 entity class from the given ClassMetadataInfo instance.
+     *
+     * @param ClassMetadataInfo $metadata
+     *
+     * @return string
+     */
+    public function generateEntityClass(ClassMetadataInfo $metadata)
+    {
+    	$placeHolders = array(
+    			'<namespace>',
+    			'<useStatement>',
+    			'<entityAnnotation>',
+    			'<entityClassName>',
+    			'<entityBody>'
+    	);
+    
+    	$replacements = array(
+    			$this->generateEntityNamespace($metadata),
+    			$this->generateEntityUse(),
+    			$this->generateEntityDocBlock($metadata),
+    			$this->generateEntityClassName($metadata),
+    			$this->generateEntityBody($metadata)
+    	);
+    
+    	$code = str_replace($placeHolders, $replacements, static::$classTemplate) . "\n";
+    
+    	return str_replace('<spaces>', $this->spaces, $code);
+    }
+    
     protected function generateEntityBody(ClassMetadataInfo $metadata)
     {
     	$stubMethods = $this->generateEntityStubMethods ? $this->generateEntityStubMethods($metadata) : null;
