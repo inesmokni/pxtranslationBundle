@@ -5,12 +5,8 @@
 		"translation"
 	],
 	"license" : "MIT",
-	"authors" : [{
-<<<<<<< HEAD
+	"authors" : [{  
 			"name" : "Ines Mokni",
-=======
-			"name" : "Ines Moknir",
->>>>>>> bf387c02bcac2b80e499ced2a4fc7a32c7a0b2e9
 			"email" : "ines.mokni@proxym-it.com"
 		}
 	],
