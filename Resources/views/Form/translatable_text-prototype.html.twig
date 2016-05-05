@@ -1,0 +1,65 @@
+{% block translatable_text_widget %}
+{% spaceless %}
+<link rel="stylesheet" href="{{ asset('bundles/translationpxtranslation/css/flags/flags.css') }}" />
+<style>
+
+.flag-input-prepend{
+   font-size: 0;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    }
+.flag-input-prepend .flag-add-on{
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 20px;
+    line-height: 20px;
+    min-width: 16px;
+    padding: 4px 5px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    width: auto;
+}
+
+.flag-input-prepend .flag-add-on + input{
+color: #555;
+    height:26px;
+    line-height:20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 3px 3px 0;
+     position:absolute;
+      width: 400px;
+    }
+</style>
+<div {{ block('widget_container_attributes') }}>
+    {{ block('form_translatable_rows') }}
+    {{ form_errors(form) }}
+</div>
+{% endspaceless %}
+
+{% endblock translatable_text_widget %}
+{% block form_translatable_rows %}
+{% spaceless %}
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock form_translatable_rows %}
+
+
+{% block flag_text_widget %}
+{% spaceless %}
+	{% include 'translationpxTranslationBundle:Form:flag_text-prototype.html.twig' %}
+{% endspaceless %}
+{% endblock flag_text_widget %}
+
+
+{% block flag_textarea_widget %}
+{% spaceless %}
+	{% include 'translationpxTranslationBundle:Form:flag_textarea-prototype.html.twig' %}
+{% endspaceless %}
+{% endblock flag_textarea_widget %}
+
