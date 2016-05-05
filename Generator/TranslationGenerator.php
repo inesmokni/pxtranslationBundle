@@ -343,14 +343,14 @@ class TranslationGenerator extends EntityGenerator
     
     protected function generateEntityTransBody(ClassMetadataInfo $metadata)
     {
-    	$template = '/* @ORM\ManyToOne(targetEntity="<entity>", inversedBy="translations")
+    	$template = '/** @ORM\ManyToOne(targetEntity="<entity>", inversedBy="translations")
      				  * @ORM\JoinColumn(name="translatable_id", referencedColumnName="id")
      				  */
     				protected $translatable;';
     
 
  		$replacements = array(
- 				'<entity>'		  => $metadata->namespace . '\Translation\\' . $this->getClassName($metadata),
+ 				'<entity>'		  => $metadata->namespace . '\\' . $this->getClassName($metadata),
         );
     	 
     	$code = str_replace(
@@ -430,6 +430,7 @@ class TranslationGenerator extends EntityGenerator
  			*             "locale", "translatable_id", "property"
  			*         })}
  			* )
+    	    * @ORM\Entity() 
     		';
     
     	$lines[] = ' */';
@@ -505,7 +506,7 @@ class TranslationGenerator extends EntityGenerator
     	$template = self::$transMethodTemplate;  
     	 
     	$replacements = array(
-    			'<transEntity>'		  => $metadata->namespace . '\Translation\\' . $this->getClassName($metadata) . 'Translation',
+    			'<transEntity>'		  => $metadata->namespace . '\\' . $this->getClassName($metadata) . 'Translation',
     	);
     	
     	$method = str_replace(

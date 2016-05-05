@@ -1,4 +1,16 @@
 services:
-#    translationpx_translation.example:
-#        class: translation\pxTranslationBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    form.type.translatable_text:  
+        class: translation\pxTranslationBundle\Form\Type\translatableType
+        arguments: ['@service_container']
+        tags:
+            - { name: form.type, alias: translatable_text }
+    form.type.flag_text: 
+        class: translation\pxTranslationBundle\Form\Type\FlagTextType
+        arguments: []
+        tags:
+            - { name: form.type, alias: flag_text }
+    form.type.flag_textarea: 
+        class: translation\pxTranslationBundle\Form\Type\FlagTextAreaType
+        arguments: []
+        tags:
+            - { name: form.type, alias: flag_textarea }
