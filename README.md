@@ -10,7 +10,7 @@
 
 # Install pxtranslationBundle
 
-1/ Add require to your composer.json :
+1/ Add require to your composer.json and update:
 
     "translation/px-translation-bundle" : "dev-master"
    
@@ -33,7 +33,7 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" >
      </script>
     
-6/ Update your entities by this command : 
+6/ Update your entities by this command, you ness to make sure that you delete the correspondents getter and setters : 
 
     php app/console doctrine:translate:entity myBundle:entityName column
     (exple: php app/console doctrine:translate:entity AppBundle:Book description)
