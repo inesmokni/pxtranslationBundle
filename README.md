@@ -11,29 +11,36 @@
 # Install pxtranslationBundle
 
 1/ Add require to your composer.json :
-   "translation/px-translation-bundle" : "dev-master"
+
+    "translation/px-translation-bundle" : "dev-master"
    
 2/ Update your AppKernel.php:
-   new translation\pxTranslationBundle\translationpxTranslationBundle()
+
+    new translation\pxTranslationBundle\translationpxTranslationBundle()
 
 3/ Update your assets :
-   php app/console assets:install
+
+    php app/console assets:install
 
 4/ Add the translation custom theme uder Twig in your config.yml :
+
     twig:
       form_themes:
         - 'translationpxTranslationBundle:Form:translatable_text-prototype.html.twig'
         
 5/ Make sure JQuery is included in your base template:
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" >
-    </script>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" >
+     </script>
     
 6/ Update your entities by this command : 
-   php app/console doctrine:translate:entity myBundle:entityName column
-   (exple: php app/console doctrine:translate:entity AppBundle:Book description)
+
+    php app/console doctrine:translate:entity myBundle:entityName column
+    (exple: php app/console doctrine:translate:entity AppBundle:Book description)
    
 7/ Update your database:
-  php app/console doctrine:schema:update --force 
+
+    php app/console doctrine:schema:update --force 
    
 8/ Update your form type:
     
