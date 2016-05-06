@@ -81,7 +81,40 @@ class TranslationGenerator extends EntityGenerator
         }
         return new  \Gedmo\Translator\TranslationProxy($this, $locale, array($property), "<transEntity>", $this->translations);
     }
-    		' ;
+        /**
+     * Add translations
+     *
+     * @param <transEntity> $translations
+     * @return Book
+     */
+    public function addTranslation(<transEntity> $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param <transEntity> $translations
+     */
+    public function removeTranslation(<transEntity> $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }		
+    		
+    ' ;
     
     
 
