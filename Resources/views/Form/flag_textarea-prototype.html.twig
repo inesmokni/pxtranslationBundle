@@ -1,15 +1,19 @@
 {% block flag_textarea_widget %}
 {% spaceless %}
 <!-- autosize textareas -->
-<script src="{{ asset('js/forms/jquery.autosize.min.js') }}"></script> 
-<div class="input-prepend">
-    <span class="add-on "><span class="flag-icon flag-icon-{{ name }}"></span></span>
-    <textarea class="trans_textarea" {{ block('widget_attributes') }}>{{ value }}</textarea>
+<div class="input-prepend flag-input-prepend">
+    <span class="add-on flag-add-on" id="flag_{{ id }}"><div class="flag-icon flag flag-{{ name }}"></div></span>
+    <textarea class="trans_textarea" id ="{{ id }}" name="{{ full_name }}" class="{{ form.vars.attr.class }}" >{{ value }}</textarea>
 </div>
+<script src="{{ asset('bundles/translationpxtranslation/js/jquery.autosize.min.js') }}"></script> 
+
 <script type="text/javascript">
+
+
     $('#{{ id }}').autosize({
         callback: function(){
-            var height = $('#{{ id }}').height() + 6;
+            console.log("here");
+            var height = $('#{{ id }}').height() - 7;
             $('#flag_{{ id }}').css('height', height+'px');
         }
     });

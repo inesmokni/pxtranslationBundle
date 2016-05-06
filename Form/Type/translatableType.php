@@ -9,22 +9,22 @@ use translation\pxTranslationBundle\Form\DataTransformer\TranslatableTransformer
 /**
  * Creates a translatable form field
  *
+ * @author mInes <ines.mokni@proxym-it.com>
+ *
  */
 class translatableType extends AbstractType {
 
-    private $em;
     private $languages_list;
     private $container;
 
     public function __construct($container) {
        $this->container = $container;
        $this->languages_list = $this->container->getParameter("locale_list");
-       $this->em = $this->container->get("doctrine")->getManager();
     }
 
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options) {
-//             $transformer = new TranslatableTransformer($this->om, $builder, $this->container, $this->entity);
-//             $builder->addModelTransformer($transformer);
+            $transformer = new TranslatableTransformer( $this->container, $builder);
+            $builder->addModelTransformer($transformer);
             if ($this->languages_list)
                 foreach ($this->languages_list as $key=> $language):
                     $required = $language["required"];
@@ -34,6 +34,7 @@ class translatableType extends AbstractType {
     
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
+        	'data_class' => null,
             'type' => 'text',
             'class' => 'span9',
             'parent_data' => null,

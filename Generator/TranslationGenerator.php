@@ -79,7 +79,7 @@ class TranslationGenerator extends EntityGenerator
         if (null === $locale) {
             return $this;
         }
-        return new  Gedmo\Translator\TranslationProxy($property, $locale, array($property), "<transEntity>", $this->translations);
+        return new  \Gedmo\Translator\TranslationProxy($this, $locale, array($property), "<transEntity>", $this->translations);
     }
     		' ;
     
@@ -120,7 +120,7 @@ class TranslationGenerator extends EntityGenerator
                 /** optional*/
                 if ($locale == "fr")
                     $this-><fieldName> = $cont;
-                $this->translate("<fieldName>", $locale)->setContent($cont);
+                $this->translate("<fieldName>", $locale)-><methodName>($cont);
             endforeach;
         elseif ($<variableName> !== null) :
             $this-><fieldName> = $<variableName>;

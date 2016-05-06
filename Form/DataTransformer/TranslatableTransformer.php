@@ -3,23 +3,19 @@
 namespace translation\pxTranslationBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * TranslatableTransformer
+ * 
+ * @author mInes <ines.mokni@proxym-it.com>
  *
  */
 class TranslatableTransformer implements DataTransformerInterface {
 
-    private $om;
-    private $entity;
     private $property;
     private $container;
 
-    public function __construct(ObjectManager $om, $builder, $container, $parent_data) {
-        $this->om = $om;
-        $this->entity = $parent_data;
-
+    public function __construct($container, $builder, $parent_data = null) {
         $this->property = $builder->getName();
         $this->container = $container;
     }
@@ -30,33 +26,15 @@ class TranslatableTransformer implements DataTransformerInterface {
             return null;
         }
         $values = array();
-        if (is_string($val)):
-            if ($this->entity):
-                foreach ($this->entity->getTranslations() as $translation):
-
-                    if ($translation->getProperty() == $this->property):
-                        $method = 'get' . $this->humanize($this->property);
-                        $values[$translation->getLocale()] = $translation->getValue();
-                    endif;
-                endforeach;
-            endif;
-        else:
-            foreach ($val as $value):
-                if (is_object($value)):
-                    if ($this->property == 'contracts') {
-                        $values[$value->getLocale()] = $value->getFileName();
-                    } else {
-                        $method = 'get' . $this->humanize($this->property);
-                        $translatable = $value->getTranslatable()->$method();
-                        foreach ($translatable as $translation):
-                            if ($translation->getProperty() == $this->property):
-                                $values[$translation->getLocale()] = $translation->getValue();
-                            endif;
-                        endforeach;
-                    }
-                endif;
+        if (is_object($val)):
+        	$translatable = $val->getTranslations();
+            foreach ($translatable as $translation):
+                 if ($translation->getProperty() == $this->property):
+                     $values[$translation->getLocale()] = $translation->getValue();
+                 endif;
             endforeach;
         endif;
+        
         return $values;
     }
 

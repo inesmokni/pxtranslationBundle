@@ -2,5 +2,5 @@ parameters:
   locale_list:
       fr : 
         required: true
-      gb :
+      en :
         required: false

@@ -1,9 +1,9 @@
 {% block flag_text_widget %}
 {% spaceless %}
     {% set type = type|default('text') %}
-<div class="input-prepend flag-input-prepend">
-    <span class="add-on flag-add-on">     <div class="flag-icon flag-icon-{{ name }} flag flag-fr"></div></span>
-    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+<div class="input-prepend flag-input-prepend" >
+    <span class="add-on flag-add-on">     <div class="flag-icon flag flag-{{ name }}"></div></span>
+    <input type="{{ type }}" id ="{{ id }}" name="{{ full_name }}" class="{{ form.vars.attr.class }}"  {% if value is not empty %}value="{{ value }}" {% endif %}/>
 </div>
 {% endspaceless %}
 {% endblock flag_text_widget %}

@@ -1,8 +1,9 @@
 {% block translatable_text_widget %}
 {% spaceless %}
 <link rel="stylesheet" href="{{ asset('bundles/translationpxtranslation/css/flags/flags.css') }}" />
-<style>
 
+<style>
+.flag.flag-en {background-position: -176px -44px}
 .flag-input-prepend{
    font-size: 0;
     margin-bottom: 5px;
@@ -23,8 +24,8 @@
     width: auto;
 }
 
-.flag-input-prepend .flag-add-on + input{
-color: #555;
+.flag-input-prepend .flag-add-on + input, .flag-input-prepend .flag-add-on + textarea{
+	color: #555;
     height:26px;
     line-height:20px;
     background-color: #fff;
@@ -32,6 +33,10 @@ color: #555;
     border-radius: 0 3px 3px 0;
      position:absolute;
       width: 400px;
+    }
+    
+    .flag-input-prepend .flag-add-on + textarea{
+      min-height: 120px;
     }
 </style>
 <div {{ block('widget_container_attributes') }}>
