@@ -62,45 +62,7 @@ class TranslateEntityCommand extends DoctrineCommand
             ->addArgument('name', InputArgument::REQUIRED, 'A bundle name, a namespace, or a class name')
             ->addArgument('column', InputArgument::REQUIRED, 'A column name')
             ->addOption('no-backup', null, InputOption::VALUE_NONE, 'Do not backup existing entities files.')
-            ->setHelp(<<<EOT
-The <info>%command.name%</info> command generates entity classes
-and method stubs from your mapping information:
-
-You have to limit generation of entities:
-
-* To a bundle:
-
-  <info>php %command.full_name% MyCustomBundle</info>
-
-* To a single entity:
-
-  <info>php %command.full_name% MyCustomBundle:User</info>
-  <info>php %command.full_name% MyCustomBundle/Entity/User</info>
-
-* To a namespace
-
-  <info>php %command.full_name% MyCustomBundle/Entity</info>
-
-If the entities are not stored in a bundle, and if the classes do not exist,
-the command has no way to guess where they should be generated. In this case,
-you must provide the <comment>--path</comment> option:
-
-  <info>php %command.full_name% Blog/Entity --path=src/</info>
-
-By default, the unmodified version of each entity is backed up and saved
-(e.g. Product.php~). To prevent this task from creating the backup file,
-pass the <comment>--no-backup</comment> option:
-
-  <info>php %command.full_name% Blog/Entity --no-backup</info>
-
-<error>Important:</error> Even if you specified Inheritance options in your
-XML or YAML Mapping files the generator cannot generate the base and
-child classes for you correctly, because it doesn't know which
-class is supposed to extend which. You have to adjust the entity
-code manually for inheritance to work!
-
-EOT
-        );
+            ;
     }
 
     /**
@@ -108,7 +70,6 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	
         $manager = new DisconnectedMetadataFactory($this->getContainer()->get('doctrine'));
 
             $name = strtr($input->getArgument('name'), '/', '\\');
@@ -130,7 +91,7 @@ EOT
 
 //         $repoGenerator = new EntityRepositoryGenerator();
         
-        
+        $columns = explode(",",$input->getArgument('column'));
         foreach ($metadata->getMetadata() as $m) {
             if ($backupExisting) {
                 $basename = substr($m->name, strrpos($m->name, '\\') + 1);
@@ -146,13 +107,12 @@ EOT
             }
 
             $output->writeln(sprintf('  > generating <comment>%s</comment>', $m->name));
-            $generator->setField($input->getArgument('column'));
-            $generator->generateTranslation(array($m), $entityMetadata->getPath());
             
+            foreach ($columns as $column){
+	            $generator->setField($column);
+	            $generator->generateTranslation(array($m), $entityMetadata->getPath());
+            }
 
-//             if ($m->customRepositoryClassName && false !== strpos($m->customRepositoryClassName, $metadata->getNamespace())) {
-//                 $repoGenerator->writeEntityRepositoryClass($m->customRepositoryClassName, $metadata->getPath());
-//             }
         }
     }
 }
