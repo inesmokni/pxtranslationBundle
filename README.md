@@ -33,10 +33,10 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" >
      </script>
     
-6/ Update your entities by this command, you ness to make sure that you delete the correspondents getter and setters : 
+6/ Update your entities by this command, you need to make sure that you delete the correspondents getter and setters before executing the command line : 
 
-    php app/console doctrine:translate:entity myBundle:entityName column
-    (exple: php app/console doctrine:translate:entity AppBundle:Book description)
+    php app/console doctrine:translate:entity myBundle:entityName column1,column2
+    (exple: php app/console doctrine:translate:entity AppBundle:Book name,description)
    
 7/ Update your database:
 
