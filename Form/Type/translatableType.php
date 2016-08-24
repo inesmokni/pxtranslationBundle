@@ -41,7 +41,7 @@ class translatableType extends AbstractType {
     {
     	$resolver->setDefaults(array(
     		'data_class' => null,
-            'type' => 'text',
+            'type' => TextType::class,
             'class' => 'span9',
             'parent_data' => null,
             'allow_add' => true,
@@ -50,7 +50,12 @@ class translatableType extends AbstractType {
     }
 
     public function getName() {
-        return 'translatable_text';
+        return $this->getBlockPrefix();
+    }
+    
+    public function getBlockPrefix()
+    {
+    	return 'translatable_text';
     }
 
 }

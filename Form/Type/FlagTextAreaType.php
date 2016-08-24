@@ -32,9 +32,13 @@ class FlagTextAreaType extends AbstractType {
     }
 
     public function getName() {
-        return 'flag_textarea';
+    	return $this->getBlockPrefix();
     }
-
+    
+    public function getBlockPrefix()
+    {
+    	return 'flag_textarea';
+    }
 }
 
 ?>

@@ -32,10 +32,15 @@ class FlagTextType extends AbstractType {
         return 'text';
     }
 
+    
     public function getName() {
-        return 'flag_text';
+    	return $this->getBlockPrefix();
     }
-
+    
+    public function getBlockPrefix()
+    {
+    	return 'flag_text';
+    }
 }
 
 ?>
