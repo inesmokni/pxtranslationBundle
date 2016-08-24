@@ -28,7 +28,7 @@ class FlagTextAreaType extends AbstractType {
     }
     
     public function getParent() {
-        return 'text';
+        return Textarea::class;
     }
 
     public function getName() {

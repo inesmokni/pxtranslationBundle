@@ -29,7 +29,7 @@ class FlagTextType extends AbstractType {
     }
 
     public function getParent() {
-        return 'text';
+        return TextType::class;
     }
 
     
