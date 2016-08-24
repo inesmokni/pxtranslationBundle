@@ -4,6 +4,7 @@ namespace translation\pxTranslationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Creates a form field object to show a field value
@@ -11,15 +12,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class FlagTextAreaType extends AbstractType {
 
+
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
-        $resolver->setDefaults(array(
-            'attr' => array(
+    	$this->configureOptions($resolver);
+    }
+    
+    public function configureOptions(OptionsResolver $resolver)
+    {
+    	$resolver->setDefaults(array(
+			'attr' => array(
                 'size' => 16,
                 'class' => 'span9'
             ),
-        ));
+    	));
     }
-
+    
     public function getParent() {
         return 'text';
     }
