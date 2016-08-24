@@ -5,6 +5,7 @@ namespace translation\pxTranslationBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * Creates a form field object to show a field value
@@ -28,7 +29,7 @@ class FlagTextAreaType extends AbstractType {
     }
     
     public function getParent() {
-        return Textarea::class;
+        return TextareaType::class;
     }
 
     public function getName() {
