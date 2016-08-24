@@ -12,8 +12,7 @@
 
     $('#{{ id }}').autosize({
         callback: function(){
-            console.log("here");
-            var height = $('#{{ id }}').height() - 7;
+            var height = $('#{{ id }}').height()+ 2;
             $('#flag_{{ id }}').css('height', height+'px');
         }
     });
