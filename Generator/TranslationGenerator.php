@@ -150,6 +150,7 @@ class TranslationGenerator extends EntityGenerator
 	{	if (is_array($<variableName>) && !empty($<variableName>)):
 
             foreach ($<variableName> as $locale => $cont):
+    			if($cont == null) $cont = "";
                 /** optional*/
                 if ($locale == "fr")
                     $this-><fieldName> = $cont;
