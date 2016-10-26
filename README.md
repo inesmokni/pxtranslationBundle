@@ -45,12 +45,12 @@
 8/ Update your form type:
     
     - text:
-      ->add('column', 'translatable_text', array("type" => "flag_text", "data" => $builder->getData() ))
-      (exple: ->add('name', 'translatable_text', array("type" => "flag_text", "data" => $builder->getData() )) )
+      ->add('column', translatableType::class, array("data" => $builder->getData(), "type" => FlagTextType::class))
+      (exple: ->add('name', translatableType::class, array("data" => $builder->getData(), "type" => FlagTextType::class)))
     
     - textarea:
-       ->add('column', 'translatable_text', array("type" => "flag_textarea", "data" => $builder->getData() ))
-       (exple: ->add('description', 'translatable_text', array("type" => "flag_textarea", "data" => $builder->getData() )) )
+       ->add('comumn', translatableType::class, array("data" => $builder->getData(), "type" => FlagTextAreaType::class)) 
+       (exple: ->add('description', translatableType::class, array("data" => $builder->getData(), "type" => FlagTextAreaType::class)))
 
 9/ Just submit your form !
 
