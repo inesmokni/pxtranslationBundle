@@ -3,7 +3,7 @@
     {% set type = type|default('text') %}
 <div class="input-prepend flag-input-prepend" >
     <span class="add-on flag-add-on">     <div class="flag-icon flag flag-{{ name }}"></div></span>
-    <input type="{{ type }}" id ="{{ id }}" name="{{ full_name }}" class="trans_text"  {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    <input type="{{ type }}" id ="{{ id }}" name="{{ full_name }}" class="trans_text"  {% if value is not empty %}value="{{ value }}" {% endif %}  {%- if required %} required="required"{% endif -%} />
 </div>
 {% endspaceless %}
 {% endblock flag_text_widget %}
