@@ -36,9 +36,9 @@
     font-size: 14px;
     padding: 2px;
     }
-    
+
     .flag-input-prepend .flag-add-on + textarea{
-       min-height: 120px; 
+       min-height: 120px;
     }
 </style>
 <div {{ block('widget_container_attributes') }}>
@@ -59,14 +59,14 @@
 
 {% block flag_text_widget %}
 {% spaceless %}
-	{% include 'translationpxTranslationBundle:Form:flag_text-prototype.html.twig' %}
+	{% include '@translationpxTranslation/Form/flag_text-prototype.html.twig' %}
 {% endspaceless %}
 {% endblock flag_text_widget %}
 
 
 {% block flag_textarea_widget %}
 {% spaceless %}
-	{% include 'translationpxTranslationBundle:Form:flag_textarea-prototype.html.twig' %}
+    {% include '@translationpxTranslation/Form/flag_textarea-prototype.html.twig' %}
 {% endspaceless %}
 {% endblock flag_textarea_widget %}
 

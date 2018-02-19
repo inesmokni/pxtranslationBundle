@@ -10,8 +10,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Creates a translatable form field
  *
- * @author mInes <ines.mokni@proxym-it.com>
+ * @author mInes <mokni.inees@gmail.com>
  *
+ */
+
+/**
+ * Class translatableType
+ * @package translation\pxTranslationBundle\Form\Type
  */
 class translatableType extends AbstractType {
 

@@ -26,7 +26,7 @@ class TranslatableTransformer implements DataTransformerInterface {
             return null;
         }
         $values = array();
-        if (is_object($val)):
+        if (is_object($val) &&  $val->getTranslations()):
         	$translatable = $val->getTranslations();
             foreach ($translatable as $translation):
                  if ($translation->getProperty() == $this->property):

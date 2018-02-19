@@ -11,7 +11,7 @@ use Doctrine\ORM\Tools\EntityGenerator;
  * Generic class used to update PHP5 entity in order to enable translation.
  * extends Doctrine\ORM\Tools\EntityGenerator
  *
- * @author mInes <ines.mokni@proxym-it.com>
+ * @author mInes <mokni.inees@gmail.com>
  *
  */
 class TranslationGenerator extends EntityGenerator
@@ -21,146 +21,150 @@ class TranslationGenerator extends EntityGenerator
      * @var string
      */
     protected static $classTemplate =
-	'<?php
+'<?php
 
-	<namespace>
+<namespace>
 
-	use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
-	<entityAnnotation>
-	<entityClassName>
-	{
-	<entityBody>
-	}
-	';
+<entityAnnotation>
+<entityClassName>
+{
+<entityBody>
+}
+';
     
     /**
      * @var string
      */
     protected static $classTransTemplate =
-    '<?php
-    
-	<namespace>
-    
-	use Doctrine\ORM\Mapping as ORM;
-	use Gedmo\Translator\Entity\Translation;
-	use Doctrine\ORM\Mapping\Entity;
-    
-	<entityAnnotation>
-	<entityClassName>
-	{
+'<?php
 
- 	<entityBody>   
-    		
-	}
-	';
+<namespace>
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Translator\Entity\Translation;
+use Doctrine\ORM\Mapping\Entity;
+
+<entityAnnotation>
+<entityClassName>
+{
+<entityBody>   
+        
+}
+';
+
+    /**
+     * @var string
+     */
+    protected static $transFieldTemplate =
+'/**
+ * @ORM\OneToMany(
+ *     targetEntity="<transEntity>",
+ *     mappedBy="translatable",
+ *     cascade={"persist","remove"}
+ * )
+ */
+ protected $translations;
+';
 
     /**
      * @var string
      */
     protected static $transMethodTemplate =
-    ' /**
-     * @ORM\OneToMany(
-     *     targetEntity="<transEntity>",
-     *     mappedBy="translatable",
-     *     cascade={"persist","remove"}
-     * )
-     */
-    protected $translations;
-    		
-    /**
- 	* <description>
- 	*
- 	* @return <variableType>
- 	*/
-    public function translate($property, $locale = null) {
-        if (null == $this->translations)
-            $this->translations = $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-        if (null === $locale) {
-            return $this;
-        }
-        return new  \Gedmo\Translator\TranslationProxy($this, $locale, array($property), "<transEntity>", $this->translations);
-    }
-        /**
-     * Add translations
-     *
-     * @param <transEntity> $translations
-     * @return Book
-     */
-    public function addTranslation(<transEntity> $translations)
-    {
-        $this->translations[] = $translations;
-
+'		
+/**
+* <description>
+*
+* @return <variableType>
+*/
+public function translate($property, $locale = null) {
+    if (null == $this->translations)
+        $this->translations = $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    if (null === $locale) {
         return $this;
     }
+    return new  \Gedmo\Translator\TranslationProxy($this, $locale, array($property), "<transEntity>", $this->translations);
+}
 
-    /**
-     * Remove translations
-     *
-     * @param <transEntity> $translations
-     */
-    public function removeTranslation(<transEntity> $translations)
-    {
-        $this->translations->removeElement($translations);
-    }
+/**
+ * Add translations
+ *
+ * @param <transEntity> $translations
+ * @return Book
+ */
+public function addTranslation(<transEntity> $translations)
+{
+    $this->translations[] = $translations;
 
-    /**
-     * Get translations
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
-    }		
-    		
-    ' ;
-    
-    
+    return $this;
+}
+
+/**
+ * Remove translations
+ *
+ * @param <transEntity> $translations
+ */
+public function removeTranslation(<transEntity> $translations)
+{
+    $this->translations->removeElement($translations);
+}
+
+/**
+ * Get translations
+ *
+ * @return \Doctrine\Common\Collections\Collection 
+ */
+public function getTranslations()
+{
+    return $this->translations;
+}		
+        
+' ;
 
     /**
      * @var string
      */
     protected static $getMethodTemplate =
-	'/**
- 	* <description>
- 	*
- 	* @return <variableType>
-    *		
- 	*/
-     public function <methodName>(){
-    	if ($this->translate("<fieldName>", \Locale::getDefault())-><methodName>()):
-            <spaces>return $this->translate("<fieldName>", \Locale::getDefault())-><methodName>();
-        else:
-            <spaces>return $this-><fieldName>;
-        endif;
-    		}' ;
+'/**
+* <description>
+*
+* @return <variableType>
+*		
+*/
+ public function <methodName>(){
+    if ($this->translate("<fieldName>", \Locale::getDefault())-><methodName>()):
+        <spaces>return $this->translate("<fieldName>", \Locale::getDefault())-><methodName>();
+    else:
+        <spaces>return $this-><fieldName>;
+    endif;
+        }' ;
 
     /**
      * @var string
      */
     protected static $setMethodTemplate =
-  	'/**
- 	* <description>
- 	*
- 	* @param <variableType>$<variableName>
- 	* @return <entity>
- 	*/
-	public function <methodName>(<methodTypeHint>$<variableName><variableDefault>)
-	{	if (is_array($<variableName>) && !empty($<variableName>)):
+'/**
+* <description>
+*
+* @param <variableType>$<variableName>
+* @return <entity>
+*/
+public function <methodName>(<methodTypeHint>$<variableName><variableDefault>)
+{	if (is_array($<variableName>) && !empty($<variableName>)):
 
-            foreach ($<variableName> as $locale => $cont):
-    			if($cont == null) $cont = "";
-                /** optional*/
-                if ($locale == "fr")
-                    $this-><fieldName> = $cont;
-                $this->translate("<fieldName>", $locale)-><methodName>($cont);
-            endforeach;
-        elseif ($<variableName> !== null) :
-            $this-><fieldName> = $<variableName>;
-        endif;
-        return $this;
-    }';  
+        foreach ($<variableName> as $locale => $cont):
+            if($cont == null) $cont = "";
+            /** optional*/
+            if ($locale == "fr")
+                $this-><fieldName> = $cont;
+            $this->translate("<fieldName>", $locale)-><methodName>($cont);
+        endforeach;
+    elseif ($<variableName> !== null) :
+        $this-><fieldName> = $<variableName>;
+    endif;
+    return $this;
+}';
     
     
     private $field;
@@ -256,9 +260,30 @@ class TranslationGenerator extends EntityGenerator
     	chmod($path, 0664);
     	chmod($path_trans, 0664);
     }
-    
-    
-    
+
+
+    /**
+     * Generates the updated code for the given ClassMetadataInfo and entity at path.
+     *
+     * @param ClassMetadataInfo $metadata
+     * @param string            $path
+     *
+     * @return string
+     */
+    public function generateUpdatedEntityClass(ClassMetadataInfo $metadata, $path)
+    {
+        $currentCode = file_get_contents($path);
+        $body = $this->generateEntityBody($metadata);
+        $transField = $this->generateEntityTransField($metadata);
+        $body = str_replace('<spaces>', $this->spaces, $body);
+        $first = strrpos($currentCode, '{');
+        $last = strrpos(substr($currentCode,$first), '}');
+
+        return substr($currentCode, 0, $first+1)."\n". $transField .  substr($currentCode, $first+1, $last-1) . $body . ($body ? "\n" : '') . "}\n";
+    }
+
+
+
     /**
      * Generates a PHP5 Doctrine 2 entity class from the given ClassMetadataInfo instance.
      *
@@ -275,7 +300,7 @@ class TranslationGenerator extends EntityGenerator
     			'<entityClassName>',
     			'<entityBody>'
     	);
-    
+
     	$replacements = array(
     			$this->generateEntityNamespace($metadata),
     			$this->generateEntityUse(),
@@ -283,9 +308,9 @@ class TranslationGenerator extends EntityGenerator
     			$this->generateEntityClassName($metadata),
     			$this->generateEntityBody($metadata)
     	);
-    
+
     	$code = str_replace($placeHolders, $replacements, static::$classTemplate) . "\n";
-    
+
     	return str_replace('<spaces>', $this->spaces, $code);
     }
     
@@ -302,6 +327,7 @@ class TranslationGenerator extends EntityGenerator
     protected function generateEntityStubMethods(ClassMetadataInfo $metadata)
     {
     	$methods = array();
+        $methods[] = $this->generateEntityTransMethod($metadata);
     	$fieldMapping = $metadata->getFieldMapping($this->field);
     		 
     		if ( ! isset($fieldMapping['id']) || ! $fieldMapping['id'] || $metadata->generatorType == ClassMetadataInfo::GENERATOR_TYPE_NONE) {
@@ -313,9 +339,7 @@ class TranslationGenerator extends EntityGenerator
     		if ($code = $this->generateEntityStubMethod($metadata, 'get', $fieldMapping['fieldName'], $fieldMapping['type'])) {
     			$methods[] = $code;
     		}
-    
-    
-    	$methods[] = $this->generateEntityTransMethod($metadata);
+
     	
     	return implode("\n\n", $methods);
     }
@@ -343,9 +367,9 @@ class TranslationGenerator extends EntityGenerator
     			$this->generateEntityClassName($metadata),
     			$this->generateEntityTransBody($metadata)
     	);
-    
+
     	$code = str_replace($placeHolders, $replacements, self::$classTransTemplate);
-    
+
     	return str_replace('<spaces>', $this->spaces, $code);
     }
 
@@ -538,7 +562,7 @@ class TranslationGenerator extends EntityGenerator
     	}
     	
     	$template = self::$transMethodTemplate;  
-    	 
+
     	$replacements = array(
     			'<transEntity>'		  => $metadata->namespace . '\\' . $this->getClassName($metadata) . 'Translation',
     	);
@@ -551,6 +575,30 @@ class TranslationGenerator extends EntityGenerator
     	
     	return $this->prefixCodeWithSpaces($method);
     	
+    }
+
+    protected function generateEntityTransField(ClassMetadataInfo $metadata){
+
+        $methodName = Inflector::singularize("translate");
+
+        if ($this->hasMethod($methodName, $metadata)) {
+            return '';
+        }
+
+        $template = self::$transFieldTemplate;
+
+        $replacements = array(
+            '<transEntity>'		  => $metadata->namespace . '\\' . $this->getClassName($metadata) . 'Translation',
+        );
+
+        $method = str_replace(
+            array_keys($replacements),
+            array_values($replacements),
+            $template
+        );
+
+        return $this->prefixCodeWithSpaces($method);
+
     }
     
     /**
@@ -604,7 +652,7 @@ class TranslationGenerator extends EntityGenerator
             array_values($replacements),
             $template
         );
-        
+
         return $this->prefixCodeWithSpaces($method);
     }
 

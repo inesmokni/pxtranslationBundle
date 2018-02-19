@@ -9,8 +9,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 /**
+ * Class FlagTextType
+ * @package translation\pxTranslationBundle\Form\Type
  * Creates a form field object to show a field value
  *
+ * @author mInes <mokni.inees@gmail.com>
  */
 class FlagTextType extends AbstractType {
 

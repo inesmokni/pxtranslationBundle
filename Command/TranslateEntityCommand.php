@@ -24,10 +24,11 @@ use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use translation\pxTranslationBundle\Generator\TranslationGenerator;
 
 /**
- * Generate entity classes from mapping information
+ * Class TranslateEntityCommand
+ * @package translation\pxTranslationBundle\Command
  *
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Jonathan H. Wage <jonwage@gmail.com>
+ * @author mInes <mokni.inees@gmail.com>
+
  */
 class TranslateEntityCommand extends DoctrineCommand
 {
@@ -89,8 +90,6 @@ class TranslateEntityCommand extends DoctrineCommand
         $backupExisting = !$input->getOption('no-backup');
         $generator->setBackupExisting($backupExisting);
 
-//         $repoGenerator = new EntityRepositoryGenerator();
-        
         $columns = explode(",",$input->getArgument('column'));
         foreach ($metadata->getMetadata() as $m) {
             if ($backupExisting) {
