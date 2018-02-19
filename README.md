@@ -20,7 +20,7 @@
 
 3/ Update your assets :
 
-    php app/console assets:install
+    php bin/console assets:install
 
 4/ Add the translation custom theme uder Twig in your config.yml :
 
@@ -35,12 +35,12 @@
     
 6/ Update your entities by this command, you need to make sure that you delete the correspondents getter and setters before executing the command line : 
 
-    php app/console doctrine:translate:entity myBundle:entityName column1,column2
-    (exple: php app/console doctrine:translate:entity AppBundle:Book name,description)
+    php bin/console doctrine:translate:entity myBundle:entityName column1,column2
+    (exple: php bin/console doctrine:translate:entity AppBundle:Book name,description)
    
 7/ Update your database:
 
-    php app/console doctrine:schema:update --force 
+    php bin/console doctrine:schema:update --force 
    
 8/ Update your form type:
     
