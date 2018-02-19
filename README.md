@@ -1,6 +1,6 @@
 # pxtranslationBundle
  This bundle is about making an entity translatable and creating forms to store translated data into database.
- It's base on Gedmo Doctrine2 extensions.
+ It's based on Gedmo Doctrine2 extensions.
  
 # Features
   - Updates the database to handle translation
