@@ -26,7 +26,7 @@
 
     twig:
       form_themes:
-        - 'translationpxTranslationBundle:Form:translatable_text-prototype.html.twig'
+         - '@translationpxTranslation/Form/translatable_text-prototype.html.twig'
         
 5/ Make sure JQuery is included in your base template:
 
